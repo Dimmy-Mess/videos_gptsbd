@@ -1,5 +1,6 @@
 MODULE MATRIX
 CONTAINS
+
 SUBROUTINE H_CHAIN(H,N,M)
 	
 	INTEGER, INTENT(IN):: N,M
@@ -59,10 +60,11 @@ END SUBROUTINE SHOW
 END MODULE MATRIX
 
 !###############################################################################
+
 PROGRAM mod_ab
 USE MATRIX
 
-INTEGER :: M,N
+INTEGER :: M,N, NT
 INTEGER, DIMENSION(:,:), ALLOCATABLE:: H, H2
 
 
@@ -71,12 +73,29 @@ read*,N
 print*, 'Quantos elementos formam uma coluna?'
 read*,M
 
-ALLOCATE(H(N,N))
+NT = N+2
 
+ALLOCATE(H(N,N))
+ALLOCATE(H2(NT,NT))
 
 CALL H_CHAIN(H,N,M)
+
+H2 = 0
+
+!Adicionando ligacoes entre elementos das extremidades e da cadeia
+H2(1,2) = 2
+H2(N+1,NT) = 2
+H2 = H2 + TRANSPOSE(H2)
+
+!Escrevendo Hamiltoniano completo
+H2(2:N+1,2:N+1) = H
+H2(1,1) = 3
+H2(NT,NT) = 3
+
+
+
 PRINT*,'RESULTADO (H_chain)'
-CALL SHOW(H)
+CALL SHOW(H2)
 
 END PROGRAM mod_ab
 
