@@ -6,4 +6,5 @@ Este repositório foi criado para colocar slides e programas relacionados às mi
 ASSISTA:
 
 * Vídeo 01: <https://youtu.be/sMdxuwYx6v8>
+* Vídeo 02: <https://youtu.be/OU-T23D_gzs>
 
